@@ -14,3 +14,7 @@
 - compositor:       picom
 - screenshot tool:  flameshot
 - lock screen:      betterlockscreen
+## important info:
+this config has been made for laptops with 2 batteries. if you want, 
+you can remake the polybar config yourself for only one battery or
+completely remove the battery module.
