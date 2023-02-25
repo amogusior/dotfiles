@@ -8,13 +8,14 @@
 - shell:            zsh (theme: starship)
 - terminal:         kitty
 - text editor:      nvim with spacevim.
-- fetch:            pfetch
+- fetch:            nitch
 - bar:              polybar
 - program launcher: rofi
 - compositor:       picom
 - screenshot tool:  flameshot
-- lock screen:      betterlockscreen
+- lock screen:      i3lock
 ## important info:
 this config has been made for laptops with 2 batteries. if you want, 
 you can remake the polybar config yourself for only one battery or
 completely remove the battery module.
+## zshrc and aliasrc are from [ggorg](https://github.com/GGORG0)
