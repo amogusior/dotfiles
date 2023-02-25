@@ -1,1 +1,116 @@
-/home/hexa/docs/dotfiles/shells/zsh/aliasrc
+#!/usr/bin/zsh
+## @File shells/zsh/aliasrc
+## @Copy ~/.aliasrc
+
+###############################################
+##                 ~/.aliasrc                ##
+##   All the custom shell aliases are here   ##
+##                                           ##
+##                   GGORG                   ##
+##        https://gh.ggorg.tk/dotfiles       ##
+##             shells/zsh/aliasrc            ##
+###############################################
+
+## Bat is a better alternative to cat and man
+## @Requires bat
+alias cat="bat"
+## @Requires bat-extras
+alias man="batman"
+
+## Exa is a better ls command
+## @Requires exa
+alias ls='exa -h --icons --color=always'
+alias l='ls -al'
+alias ll='ls -l'
+alias la="l"
+alias dir="ls"
+
+## Just some clear aliases
+## Did you know CTRL+L clears the screen?
+## @Requires ncurses
+alias cls="clear"
+alias c="clear"
+
+## Ripgrep searches for things in a directory
+## @Requires ripgrep
+alias findstr="rg"
+## @Uncomment to use grep
+#alias findstr="grep -RHIni"
+
+## Zoxide is a better cd command
+## @Requires zoxide
+alias cd="z"
+
+## Aliases for cd ..
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+## Useful stuff
+alias mkdir="mkdir -p"
+alias cp="cp -r"
+alias rrf="rm -rf -i"
+alias rm="rm -i"
+alias du="du -hs"
+
+## Python aliases
+## @Requires python
+alias py="python3"
+## @Requires ipython
+alias ipy="ipython"
+## @Requires python-pip
+alias pip="python3 -m pip"
+alias pipi="python3 -m pip install"
+
+## Sudo aliases
+## @Requires sudo
+alias sudo="sudo " ## Get sudo to expand aliases
+alias s="sudo"
+alias sudoe="sudoedit"
+alias sv="sudoedit"
+
+## Ncat is a better netcat
+## @Requires nmap
+alias nc="ncat"
+
+## Termbin, as the name suggests, is a terminal pastebin
+## @Requires nmap
+alias tb="ncat termbin.com 9999"
+
+## Just git stuff
+## @Requires git
+alias g="git"
+alias gs="git status"
+alias gc="git commit -a -m"
+alias gp="git push"
+alias ga="git add"
+alias gpu="git pull"
+alias gpura="git pull --rebase --autostash"
+
+## Editor aliases
+## Change your editor in ~/.zshrc
+alias edit="$EDITOR"
+alias vi="$EDITOR"
+alias nano="$EDITOR"
+alias vim="$EDITOR"
+alias v="$EDITOR"
+
+## Paru is a better AUR helper
+## @Requires aur:paru
+alias yay="paru"
+alias upd="paru -Syu"
+alias ins="paru -S --needed"
+alias spotdl="python3 -m spotdl"
+
+## Quickly search for packages
+## @Requires aur:paruz
+alias yaz="paruz"
+
+## Terminal rickroll ;)
+## @Requires curl
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+
+## I never remember how to copy files using xclip
+## @Requires xclip
+alias copy="xclip -in -selection clipboard"
