@@ -1,0 +1,326 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+; catpuccin background = 302c40
+; catpuccin background-alt = 565368
+; gruvbox background = 3c3836
+; gruvbox background-alt = 665c54
+
+[colors]
+background = #000000
+background-alt = #404040
+foreground = #ffffff
+primary = #ffffff
+underline = #ffffff
+secondary = #8ABEB7
+alert = #A54242
+disabled = #707880
+
+[things]
+font = "Source Code Variable Bold Italic"
+offset-y = 1% 
+;2.3%
+
+[bar/main]
+width = 98.4%
+height = 30px
+radius = 0
+border-size = 3.8px
+border-color = #FFFFFF
+offset-x = 0.8% 
+;1.5%
+offset-y = ${things.offset-y}
+line-size = 2pt
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+padding-left = 0
+padding-right = 2
+bottom = false
+module-margin = 1.2
+
+separator = |
+separator-foreground = #909090
+
+font-0 = "Source Code Variable Bold Italic:size=10,6"
+
+modules-left = xworkspaces xwindow
+modules-center = 
+modules-right = battery pulseaudio memory cpu cputemp wifi date
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+[bar/one]
+inherit = bar/main
+width = 35%
+padding-left = 0
+padding-right = 1
+offset-x = 47%
+modules-center = pulseaudio memory cpu disk xkeyboard updat
+
+[bar/two]
+inherit = bar/main
+width = 13%
+offset-x = 85%
+modules-center = date
+
+[bar/spot]
+inherit = bar/main
+separator =  
+width = 30%
+module-margin = 1
+offset-x = 14%
+modules-center = spotify
+
+; T R A Y
+
+tray-detached = true
+tray-offset-x = 1
+tray-offset-y = 1
+tray-padding = 1
+tray-maxsize = 20
+tray-scale = 1
+tray-position = center
+
+# W O R K S P A C E S
+
+
+
+[module/xworkspaces] 
+type = internal/xworkspaces
+
+label-active = %name%
+#label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.underline}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+; W I N D O W  T I T L E
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+
+; S O U N D
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = "vol " 
+format-volume-prefix-foreground = ${colors.primary}
+;format-volume-underline= ${colors.underline}
+format-volume = <label-volume>
+click-right = pavucontrol
+
+label-volume = "%percentage%%"
+;label-volume-underline= ${colors.underline}
+ 
+label-muted = "muted"
+label-muted-foreground = ${colors.primary}
+;label-muted-underline = ${colors.underline}
+
+; W E A T H E R
+
+;[module/weather]
+;type = custom/script
+;exec = ~/.config/polybar-forecast/polybar-forecast
+;exec-if = ping openweathermap.org -c 1
+;interval = 600
+;label-font = 3
+
+; U S E R
+[module/user]
+type = custom/script
+tail = true
+interval = 1000
+format = <label>
+format-prefix = " "
+exec = whoami
+click-left = ~/.config/rofi/powermenu/type-2/powermenu.sh
+
+; W I F I
+[module/wifi]
+type = custom/script
+tail = true
+interval = 1
+format = <label>
+format-prefix = "wifi "
+wifi = wifi
+wifi-alt = iwgetid -r
+exec = iwgetid -r
+click-left = kitty nmtui
+
+; C P U  T E M P
+[module/cputemp]
+type = custom/script
+tail = true
+interval = 3
+format = <label>°C
+format-prefix = "temp "
+exec = sensors -j thinkpad-isa-0000 | sed "s/-/_/g" | jq '.thinkpad_isa_0000.CPU.temp1_input'
+
+; L A Y O U T
+
+[module/xkeyboard]
+type = internal/xkeyboard
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+;format-prefix-underline= ${colors.underline}
+
+label-layout = %layout%
+;label-layout-underline= ${colors.underline}
+;label-indicator-underline = ${colors.underline}
+label-indicator-padding = 2
+
+; M E M O R Y
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "ram "
+format-prefix-foreground = ${colors.primary}
+;format-prefix-underline= ${colors.underline}
+label = %percentage_used:2%%
+;label-underline= ${colors.underline}
+
+; C P Umemo
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "cpu "
+format-prefix-foreground = ${colors.primary}
+;format-prefix-underline = ${colors.underline}
+label = %percentage:2%%
+;label-underline= ${colors.underline}
+
+; N E T W O R K
+
+[network-base]
+type = internal/network
+interval = 5
+format-prefix = "歷"
+format-connected = 歷  connected
+;format-connected-underline = ${colors.underline}
+format-disconnected = 歷  disconnected
+
+;format-disconnected-underline = ${colors.underline}
+iabel-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
+
+[module/eth]
+inherit = network-base
+interface-type = wired
+format-prefix = "歷"
+format-prefix-foreground = ${colors.primary}
+label-connected = %local_ip%
+
+[module/disk]
+type = custom/script
+interval = 1800
+format-prefix = "﫭 "
+format = <label>
+exec = "~/.config/polybar/disk.sh"
+
+[module/battery]
+type = custom/script
+interval = 1
+format-prefix = "bat "
+format = <label> 
+exec = "~/.config/polybar/scripts/battery.sh"
+
+; K E R N E L
+
+[module/kernel]
+type = custom/script
+tail = true
+interval = 1000
+format-prefix = " "
+format = <label>
+exec = ~/.config/polybar/scripts/kernel.sh
+
+; U P D A T E S
+[module/updates]
+type = custom/script
+tail = true
+interval = 1
+format-prefix = "upd: "
+format = <label>
+exec = checkupdates | wc -l
+click-left = kitty yay -Syu --noconfirm
+
+; S P O T I F Y
+
+[module/spotify]
+type = custom/script
+tail = true
+interval = 1
+format-prefix = ""
+format = <label>
+;format-prefix-underline = ${colors.underline}
+;format-underline = ${colors.underline}
+exec = ~/.config/polybar/scripts/get_spotify_status.sh
+
+[module/spotify-prev]
+type = custom/script
+exec = echo "玲"
+format = <label>
+click-left = playerctl previous -p spotify
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo ""
+hook-1 = echo ""
+initial = 1
+click-left = playerctl play-pause -p spotify
+
+[module/spotify-next]
+type = custom/script
+exec = echo "怜"
+format = <label>
+click-left = playerctl next -p spotify
+
+; C L O C K
+
+[module/date]
+type = internal/date
+interval = 1
+format-prefix = ""
+format-prefix-foreground = ${colors.primary}
+;format-prefix-underline= ${colors.underline}
+
+date-alt = %H:%M:%S %d.%m.%Y
+date = %H:%M:%S
+
+label = %date%
+;label-underline= ${colors.underline}
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = true

@@ -1,0 +1,96 @@
+# terminal
+super + t
+	      kitty
+
+# rofi
+alt + space
+        rofi -show drun
+
+# files
+super + f
+	      nemo
+
+# browser
+super + w
+	      librewolf
+
+# screenshot
+super + shift + s
+        flameshot gui
+
+# lock
+super + l
+        i3lock -c 000000
+
+### Reloads
+# sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# logoff
+super + b
+	bspc quit
+
+### Windows
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -50 0,bottom 0 50,top 0 -50,right 50 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -50 0,top 0 50,bottom 0 -50,left 50 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# close window
+alt + q
+	bspc node -c
+
+# change desktop
+alt + shift + {Left,Right}
+	id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
+
+# change state
+{F9,F10}
+	bspc node -t {floating,tiled}
+
+# focus the next/previous desktop
+alt + {Left,Right}
+	bspc desktop -f {prev,next}
+
+# next desktop (using alt + tab)
+alt + Tab
+       rofi -show window
+
+### Extra keys
+
+# lower volume
+XF86AudioLowerVolume
+	pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5%
+
+# raise volume
+XF86AudioRaiseVolume
+	pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5%
+
+# mute/unmute audio
+XF86AudioMute
+	pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle
+
+# brightness up
+XF86MonBrightnessUp
+  brightnessctl s 10%+
+
+# brightness down
+XF86MonBrightnessDown
+  brightnessctl s 10%-
+
+# search
+XF86Search
+  rofi -show drun
+
+# wlan
+XF86WLAN
+  rfkill toggle wlan && notify-send "wlan restarted"
+
