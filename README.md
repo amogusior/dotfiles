@@ -1,5 +1,4 @@
-![unknown](https://user-images.githubusercontent.com/56086445/197809533-8c0d9438-d3ef-4f1e-a787-2a4d6faca73e.png)
-
+![IMG_20230225_233151_651](https://user-images.githubusercontent.com/56086445/221382580-ae93be3f-558a-4998-bc90-ceaf0a44f322.png)
 # dotfiles
 ## hi, here are my dotfiles.
 - distro:           arch
